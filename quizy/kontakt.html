@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Stylek.css">
+    <link rel="shortcut icon" href="favicon.png" >
+    <title>Kontakt</title>
+</head>
+<body>
+   <div id="potem"><h1>Dziękujemy za Wysłanie Formularza</h1></div>
+    <div id="formu">
+        <h2>Zaproponuj nam Quiz</h2>
+ <fieldset style="width: 400px;">
+    <br>
+    <legend>Dane</legend>
+     <p> Tytuł Quizu:</p> <input type="text">
+      <br>
+      <br>
+       <p>Temat Quizu: </p><input type="text">
+      </fieldset>
+      <fieldset style="width: 400px;">
+      <br>
+      <legend>Budowa</legend>
+      <br>
+       <p>Ilość Pytań: </p><input type="number" max="20" min="0">
+      <br>
+      <br>
+      <p>Ilość Odpowiedzi (Max 4): </p><input type="number" max="4" min="0">
+      <br>
+      <br>
+       <p>Opis (wygląd Quizu): </p>
+         <textarea rows="5" cols="40" style="resize: none;  overflow: auto;" ></textarea>
+      </input>
+      </fieldset>
+      <button id="button1"  onclick="location.href='stronaglowna.html'">Wróć</button>
+      <button id="button2" onclick="location.reload()">Zacznij od Nowa</button>
+      <button id="button3">Prześlij</button>
+     
+
+      
+    </div>
+
+    <script>
+
+
+
+
+const iloscPytan = document.querySelectorAll("input")[2];
+const iloscOdp = document.querySelectorAll("input")[3];
+
+iloscPytan.addEventListener('keydown', i => {
+    i.preventDefault();
+});
+
+iloscPytan.addEventListener('paste', i => {
+    i.preventDefault();
+});
+
+
+iloscOdp.addEventListener('keydown', i => {
+    i.preventDefault();
+});
+
+iloscOdp.addEventListener('paste', i => {
+    i.preventDefault();
+});
+
+document.getElementById("button3").addEventListener("click", function(){
+    const tytulQuizu = document.querySelectorAll("input")[0].value.trim();
+    const tematQuizu = document.querySelectorAll("input")[1].value.trim();
+    const iloscPytan = document.querySelectorAll("input")[2].value.trim();
+    const iloscOdp = document.querySelectorAll("input")[3].value.trim();
+    const opis = document.querySelector("textarea").value.trim();
+
+    if(tytulQuizu === "" || tematQuizu === "" || iloscPytan === "" || iloscOdp ==="" || opis == "" ){
+        alert("Proszę uzupełnić wszystkie pola");
+    } else{
+        document.querySelector('#formu').style.display = "none";
+    document.querySelector('#potem').style.display = "block";
+    
+
+
+    const tytulQuizu = document.querySelectorAll("input")[0].value;
+    const tematQuizu = document.querySelectorAll("input")[1].value;
+    const iloscPytan = document.querySelectorAll("input")[2].value;
+    const iloscOdp = document.querySelectorAll("input")[3].value;
+    const opis = document.querySelector("textarea").value;
+
+    console.log("Tytuł Quizu: " + tytulQuizu);
+    console.log("Temat Quizu: " + tematQuizu);
+    console.log("Ilość Pytań: " + iloscPytan);
+    console.log("Ilosc Odpowiedzi: " + iloscOdp);
+    console.log("Opis: " + opis);
+    }
+
+});
+
+
+    </script>
+
+    
+</body>
+</html>

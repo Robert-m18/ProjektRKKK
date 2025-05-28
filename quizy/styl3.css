@@ -1,0 +1,109 @@
+body{
+    text-align: center;
+    background-color: rgb(140, 0, 28);
+    margin-top: 80px;
+
+}
+
+#pytaniakontener{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.637);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    margin: 50px;
+
+
+}
+#odpowiedzi button{
+    display:  inline-block;
+    width: 600px;
+    height: 90px;
+    margin: 20px ;
+    padding: 10px;
+    font-size: 30px;
+    border: 3px solid black;
+    border-radius: 15px;
+    cursor: pointer;
+    color: rgb(209, 133, 0);
+    background: #970046;
+    box-shadow: 6px 6px rgb(63, 0, 0);
+    transition: 0.8s;
+}
+
+#odpowiedzi button:hover{
+    background: #ab0808;
+    
+    transform: scale(0.9);
+}
+
+
+#kolejne{
+    margin-top: 20px;
+   padding: 15px 20px; 
+   font-size: 16px; 
+   background-color: #28a745;
+   color:  white;
+   border-radius: 50px; 
+   cursor: pointer;
+   display: none;
+   box-shadow: 0px 8px rgb(25, 43, 25);
+   border: 3px solid rgb(25, 43, 25);
+}
+
+#kolejne:hover{
+    background-color: #218838;
+}
+#pytanie{
+    font-size: 40px;
+    color: rgb(209, 133, 0);
+    margin-top: 70px;
+}
+
+h1{
+    display: inline;
+    width: 60%;
+    background-color:rgb(209, 133, 0);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+#tworcy{
+    color: white;
+    font-size: 20px;
+    float: right;
+    position: absolute;
+    top: 70%
+}
+
+#wynik{
+    color: white;
+}
+
+h2{
+    font-size: 100px;
+    color: white;
+}
+#komunikat{
+    margin-top: 40px;
+    font-size: 25px;
+}
+
+#start{
+    margin-top: 100px;
+    padding: 30px 60px; 
+    font-size: 30px; 
+    background-color: #28a745;
+    color:  white;
+    border-radius: 50px; 
+    cursor: pointer;
+    box-shadow: 0px 8px rgb(25, 43, 25);
+    border: 3px solid rgb(25, 43, 25);
+}
+#str{
+    font-size: 40px;
+    color: white;
+    margin-top: 80px;
+    
+}

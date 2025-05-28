@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="PL-pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz</title>
+<link rel="stylesheet" type="text/css" href="styl.css">
+</head>
+<body>
+<div id="quizkontener">
+    
+    <h1>Quiz o JavaScript</h1>
+    
+    <div id="pytaniekontener">
+        
+        <p id="pytanie"></p>
+        <div id="odpowiedzi"></div>
+        <div id="komunikat"></div>
+    </div>
+    <button id="kolejne" onclick="kolejPytanie()">Dalej</button>
+    <p id="wynik"></p>
+</div>
+
+    
+
+<script>
+    //zapisanie pytań jako obiektów w tablicy
+const pytania = [
+{
+    pytanie: "Co oznacza skrót JS",
+    odpowiedzi:["Java Sim", "JavaScript", "Just Script"],
+    poprawna: 1
+},
+
+{
+    pytanie: "Które słowo tworzy zmienną",
+    odpowiedzi:["var", "create", "new"],
+    poprawna: 0
+},
+
+{
+    pytanie: "Jak wywołać 'alert' w JavaScript",
+    odpowiedzi:["alarm()", "msg()", "alert()"],
+    poprawna: 2
+},
+{
+    pytanie: "Jakiego typu danych używa się do przechowywania tekstu?",
+    odpowiedzi: ["String", "Text", "Char"],
+    poprawna: 0
+  },
+
+  {
+    pytanie: "Jaki będzie wynik: 2 + '2'?",
+    odpowiedzi: ["4", "'4'", "'22'"],
+    poprawna: 2
+  },
+  {
+    pytanie: "Jakie słowo kluczowe służy do stworzenia funkcji?",
+    odpowiedzi: ["function", "method", "define"],
+    poprawna: 0
+  },
+  {
+    pytanie: "Czym jest DOM?",
+    odpowiedzi: [
+      "Typ zmiennej w JS",
+      "Model struktury dokumentu HTML",
+      "Biblioteka JavaScript"
+    ],
+    poprawna: 1
+  },
+  {
+    pytanie: "Co zwraca operator '==='?",
+    odpowiedzi: [
+      "Porównanie tylko wartości",
+      "Porównanie tylko typu",
+      "Porównanie wartości i typu"
+    ],
+    poprawna: 2
+  },
+  {
+  pytanie: "Które zdarzenie uruchamia się po kliknięciu elementu?",
+  odpowiedzi: ["onhover", "onchange", "onclick"],
+  poprawna: 2
+},
+{
+  pytanie: "Której metody użyjesz, by powtórzyć kod w pętli dopóki warunek jest prawdziwy?",
+  odpowiedzi: ["if", "for", "while"],
+  poprawna: 2
+}
+
+
+
+];
+
+//ustawione zmienne potrzebne do działaniaquizu
+let pokazanePytanie = 0;
+let wynik = 0;
+
+
+
+
+
+//funkcja wyswietlająca pytanie
+function zaladujPytanie(){
+    
+    //usuwanie komunikatu
+    const staryKomunikat = document.getElementById("komunikat");
+    if (staryKomunikat) {
+    staryKomunikat.innerHTML = "";
+    }
+
+//Pobieranie elementów z HTML
+    const pytanieEl = document.getElementById("pytanie");
+    const odpowiedziEl = document.getElementById("odpowiedzi");
+    const kolejneButton = document.getElementById("kolejne");
+
+
+    pytanieEl.textContent = pytania[pokazanePytanie].pytanie;
+    //czyszczenie starych odpowiedzi
+    odpowiedziEl.innerHTML = "";
+
+
+    //Ustawia zdarzenie kliknięcia  które wywołuje funkcję sprawdz(index) oraz tworzy przycisk z tekstem odpowiedzi
+    pytania[pokazanePytanie].odpowiedzi.forEach((odpowiedzi, index) => {
+        const button = document.createElement("button");
+        button.textContent = odpowiedzi;
+        button.onclick = () => sprawdz(index);
+        odpowiedziEl.appendChild(button);
+        
+    });
+// sprawia że nie da się przejsć dalej bez wybrania odpowiedzi
+    kolejneButton.style.display="none";
+
+}
+
+
+
+//sprawdza wybraną odpowiedź
+function sprawdz(wybranyindex){
+    const kolejneButton = document.getElementById("kolejne");
+    
+     //tworzy komunikat
+    let komunikat = document.getElementById("komunikat");
+    if (!komunikat) {
+        komunikat = document.createElement("p");
+        komunikat.style.fontSize = "20px";
+        document.getElementById("pytaniekontener").appendChild(komunikat);
+    }
+
+    // Aktualizuje treść i kolor komunikatu
+    if (wybranyindex === pytania[pokazanePytanie].poprawna) {
+        wynik++;
+        komunikat.textContent = "Dobrze!";
+        komunikat.style.color = "green";
+        pojedynczeklikniecie();
+    } else {
+        komunikat.textContent = "Źle!";
+        komunikat.style.color = "red";
+        pojedynczeklikniecie();
+    }
+    
+
+//wyswietla wynik na ilość pytań
+    document.getElementById("wynik").textContent = `Wynik: ${wynik}/${pytania.length}`;
+  
+//daje możliwosc przejscia dalej po wybraniu odpowiedzi
+    kolejneButton.style.display = "inline-block";
+    
+}
+
+
+//dodaje liczbe pytania czyli indexu oraz warunek quizu
+function kolejPytanie(){
+    pokazanePytanie++;
+    
+    if(pokazanePytanie < pytania.length){
+        
+        zaladujPytanie();
+        
+    }
+    else{
+        // tworzy przycisk na końcu który tworzy pętle pomiędzy dwoma plikami
+       document.getElementById("pytaniekontener").innerHTML = "<h2>Koniec Quizu!</h2>";
+        document.getElementById("kolejne").style.display =  "none";
+        const odNowa = document.createElement("button");
+        odNowa.textContent = "Wróć do strony głównej";
+        odNowa.onclick = () => location.href='stronaglowna.html';
+        document.body.appendChild(odNowa);
+        odNowa.style.background = "#28a745";
+        odNowa.style.padding =  "20px 40px";
+        odNowa.style.color =  "white";
+        odNowa.style.borderRadius =  "50px";
+        odNowa.style.cursor =  "pointer";
+        odNowa.style.boxShadow = "0px 8px rgb(25, 43, 25)";
+        odNowa.style.border = "3px solid rgb(25, 43, 25)";
+        odNowa.style.marginRight = "20px";
+        
+
+         const odNowa1 = document.createElement("button");
+        odNowa1.textContent = "Spróbuj jeszcze raz!";
+        odNowa1.onclick = () => location.reload();;
+        document.body.appendChild(odNowa1);
+        odNowa1.style.background = "#28a745";
+        odNowa1.style.padding =  "20px 40px";
+        odNowa1.style.color =  "white";
+        odNowa1.style.borderRadius =  "50px";
+        odNowa1.style.cursor =  "pointer";
+        odNowa1.style.boxShadow = "0px 8px rgb(25, 43, 25)";
+        odNowa1.style.border = "3px solid rgb(25, 43, 25)";
+        odNowa1.style.marginLeft = "20px";
+    
+    }
+}
+
+function pojedynczeklikniecie() {
+    const buttons = document.querySelectorAll('#odpowiedzi button');
+    buttons.forEach(btn => btn.disabled = true);
+}
+
+
+
+//uruchamia quiz
+zaladujPytanie();
+
+</script>
+    
+</body>
+</html>

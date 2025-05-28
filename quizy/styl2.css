@@ -1,0 +1,117 @@
+body{
+    text-align: center;
+    background-color: rgb(28, 21, 95);
+    margin-top: 150px;
+
+}
+
+#pytaniakontener{
+    
+    width: 800px;
+    background-color: rgba(0, 0, 0, 0.637);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    margin: 50px;
+    max-width: 960px;
+
+
+}
+#odpowiedzi button{
+    
+    display: inline-flex;
+    justify-content: center;
+    flex: wrap;
+    width: 300px;
+    height: 160px;
+    margin: 10px 30px;
+    padding: 9px;
+    font-size: 40px;
+    border: 3px solid rgb(0, 4, 75);
+    border-radius: 15px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background: #0072c9;
+    box-shadow: 6px 6px rgb(0, 4, 75);
+    transition: 0.6s;
+}
+
+#odpowiedzi button:hover{
+    background: #00299b;
+    
+    transform: scale(0.9) ; 
+    
+}
+
+
+
+
+#kolejne{
+    margin-top: 20px;
+   padding: 15px 20px; 
+   font-size: 16px; 
+   background-color: #28a745;
+   color:  white;
+   border-radius: 50px; 
+   cursor: pointer;
+   display: none;
+   box-shadow: 0px 8px rgb(25, 43, 25);
+   border: 3px solid rgb(25, 43, 25);
+}
+
+#kolejne:hover{
+    background-color: #218838;
+}
+#pytanie{
+    font-size: 40px;
+    color: white;
+    margin-top: 70px;
+}
+
+h1{
+    display: inline;
+    width: 60%;
+    background-color: rgb(39, 202, 202);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+#tworcy{
+    color: white;
+    font-size: 20px;
+    float: right;
+    position: absolute;
+    top: 70%
+}
+
+#wynik{
+    color: white;
+}
+
+h2{
+    font-size: 100px;
+    color: white;
+}
+#komunikat{
+    margin-top: 40px;
+    font-size: 25px;
+}
+
+#start{
+    margin-top: 100px;
+    padding: 30px 60px; 
+    font-size: 30px; 
+    background-color: #28a745;
+    color:  white;
+    border-radius: 50px; 
+    cursor: pointer;
+    box-shadow: 0px 8px rgb(25, 43, 25);
+    border: 3px solid rgb(25, 43, 25);
+}
+#str{
+    font-size: 40px;
+    color: white;
+    margin-top: 80px;
+    
+}

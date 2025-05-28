@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="PL-pl">
+<head>
+<meta charset="UTF-8">
+<title>Quiz</title>
+<link rel="stylesheet" type="text/css" href="styl3.css">
+</head>
+<body>
+<div id="quizkontener">
+    
+    <h1>Quiz o HTML</h1>
+    
+    <div id="pytaniekontener">
+        
+        <p id="pytanie"></p>
+        <div id="odpowiedzi"></div>
+        <div id="komunikat"></div>
+    </div>
+    <button id="kolejne" onclick="kolejPytanie()">Dalej</button>
+    <p id="wynik"></p>
+</div>
+
+    
+
+<script>
+    //zapisanie pytań jako obiektów w tablicy
+const pytania = [
+{
+    pytanie: "Co oznacza skrót HTML?",
+    odpowiedzi: [
+      "HyperText Markup Language",
+      "HighText Machine Language",
+      "HyperTransfer Main Language",
+      "Żadna nie jest poprawna"
+    ],
+    poprawna: 0
+  },
+  {
+    pytanie: "Który znacznik używany jest do tworzenia linków?",
+    odpowiedzi: ["<a>", "<link>", "<href>", "Żadna nie jest poprawna"],
+    poprawna: 0
+  },
+  {
+    pytanie: "Jak poprawnie osadzić obrazek w HTML?",
+    odpowiedzi: [
+      "<img src='obrazek.jpg'>",
+      "<image='obrazek.jpg'>",
+      "<src img='obrazek.jpg'>",
+        "Żadna nie jest poprawna"
+    ],
+    poprawna: 0
+  },
+  {
+    pytanie: "Który znacznik tworzy nagłówek najwyższego poziomu?",
+    odpowiedzi: ["<h6>", "<h1>", "<header>", "Żadna nie jest poprawna"],
+    poprawna: 1
+  },
+  {
+    pytanie: "Który atrybut otwiera link w nowej karcie?",
+    odpowiedzi: ["target='_self'", "target='_blank'", "open='new'", "Żadna nie jest poprawna"],
+    poprawna: 1
+  },
+  {
+    pytanie: "Do czego służy znacznik <form>?",
+    odpowiedzi: [
+      "Do formatowania tekstu",
+      "Do osadzania skryptów",
+      "Do tworzenia formularzy",
+      "Żadna nie jest poprawna"
+    ],
+    poprawna: 2
+  },
+  {
+    pytanie: "Który z tych znaczników jest samozamykający?",
+    odpowiedzi: ["<div>", "<p>", "<br>", "Żadna nie jest poprawna"],
+    poprawna: 2
+  },
+  {
+    pytanie: "Jak oznaczamy komentarze w HTML?",
+    odpowiedzi: [
+      "<coment>",
+      "<!-- komentarz -->",
+      "# komentarz",
+      "Żadna nie jest poprawna"
+    ],
+    poprawna: 1
+  },
+  {
+    pytanie: "Który znacznik służy do tworzenia listy nieuporządkowanej?",
+    odpowiedzi: ["<ol>", "<ul>", "<li>", "Żadna nie jest poprawna"],
+    poprawna: 1
+  },
+  {
+    pytanie: "Do czego służy znacznik <title>?",
+    odpowiedzi: [
+      "Do nadania tytułu strony w przeglądarce",
+      "Do dodania przycisku",
+      "Do stylowania nagłówków", "Żadna nie jest poprawna"
+    ],
+    poprawna: 0
+  }
+
+
+
+];
+
+//ustawione zmienne potrzebne do działaniaquizu
+let pokazanePytanie = 0;
+let wynik = 0;
+
+
+
+
+
+//funkcja wyswietlająca pytanie
+function zaladujPytanie(){
+    
+    //usuwanie komunikatu
+    const staryKomunikat = document.getElementById("komunikat");
+    if (staryKomunikat) {
+    staryKomunikat.innerHTML = "";
+    }
+
+//Pobieranie elementów z HTML
+    const pytanieEl = document.getElementById("pytanie");
+    const odpowiedziEl = document.getElementById("odpowiedzi");
+    const kolejneButton = document.getElementById("kolejne");
+
+
+    pytanieEl.textContent = pytania[pokazanePytanie].pytanie;
+    //czyszczenie starych odpowiedzi
+    odpowiedziEl.innerHTML = "";
+
+
+    //Ustawia zdarzenie kliknięcia  które wywołuje funkcję sprawdz(index) oraz tworzy przycisk z tekstem odpowiedzi
+    pytania[pokazanePytanie].odpowiedzi.forEach((odpowiedzi,index) => {
+        const button = document.createElement("button");
+        button.textContent = odpowiedzi;
+        button.onclick = () => sprawdz(index);
+        odpowiedziEl.appendChild(button);
+        
+    });
+// sprawia że nie da się przejsć dalej bez wybrania odpowiedzi
+    kolejneButton.style.display="none";
+
+}
+
+
+
+//sprawdza wybraną odpowiedź
+function sprawdz(wybranyindex){
+    const kolejneButton = document.getElementById("kolejne");
+    
+     //tworzy komunikat
+    let komunikat = document.getElementById("komunikat");
+    if (!komunikat) {
+        komunikat = document.createElement("p");
+        komunikat.style.fontSize = "20px";
+        document.getElementById("pytaniekontener").appendChild(komunikat);
+    }
+
+    // Aktualizuje treść i kolor komunikatu
+    if (wybranyindex === pytania[pokazanePytanie].poprawna) {
+        wynik++;
+        komunikat.textContent = "Dobrze!";
+        komunikat.style.color = "green";
+        pojedynczeklikniecie();
+    } else {
+        komunikat.textContent = "Źle!";
+        komunikat.style.color = "red";
+        pojedynczeklikniecie();
+    }
+    
+
+//wyswietla wynik na ilość pytań
+    document.getElementById("wynik").textContent = `Wynik: ${wynik}/${pytania.length}`;
+  
+//daje możliwosc przejscia dalej po wybraniu odpowiedzi
+    kolejneButton.style.display = "inline-block";
+    
+}
+
+
+//dodaje liczbe pytania czyli indexu oraz warunek quizu
+function kolejPytanie(){
+    pokazanePytanie++;
+    
+    if(pokazanePytanie < pytania.length){
+        
+        zaladujPytanie();
+        
+    }
+    else{
+        // tworzy przycisk na końcu który tworzy pętle pomiędzy dwoma plikami
+        document.getElementById("pytaniekontener").innerHTML = "<h2>Koniec Quizu!</h2>";
+        document.getElementById("kolejne").style.display =  "none";
+        const odNowa = document.createElement("button");
+        odNowa.textContent = "Wróć do strony głównej";
+        odNowa.onclick = () => location.href='stronaglowna.html';
+        document.body.appendChild(odNowa);
+        odNowa.style.background = "#28a745";
+        odNowa.style.padding =  "20px 40px";
+        odNowa.style.color =  "white";
+        odNowa.style.borderRadius =  "50px";
+        odNowa.style.cursor =  "pointer";
+        odNowa.style.boxShadow = "0px 8px rgb(25, 43, 25)";
+        odNowa.style.border = "3px solid rgb(25, 43, 25)";
+        odNowa.style.marginRight = "20px";
+
+        const odNowa1 = document.createElement("button");
+        odNowa1.textContent = "Spróbuj jeszcze raz!";
+        odNowa1.onclick = () => location.reload();;
+        document.body.appendChild(odNowa1);
+        odNowa1.style.background = "#28a745";
+        odNowa1.style.padding =  "20px 40px";
+        odNowa1.style.color =  "white";
+        odNowa1.style.borderRadius =  "50px";
+        odNowa1.style.cursor =  "pointer";
+        odNowa1.style.boxShadow = "0px 8px rgb(25, 43, 25)";
+        odNowa1.style.border = "3px solid rgb(25, 43, 25)";
+        odNowa1.style.marginLeft = "20px";
+         
+        
+    
+    }
+}
+
+function pojedynczeklikniecie() {
+    const buttons = document.querySelectorAll('#odpowiedzi button');
+    buttons.forEach(btn => btn.disabled = true);
+}
+
+
+
+//uruchamia quiz
+zaladujPytanie();
+
+</script>
+    
+</body>
+</html>
